@@ -33,6 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan10.data.entity.Mahasiswa
+import com.example.pertemuan10.ui.theme.costumwidget.kt.CustomTopAppBar
+import com.example.pertemuan10.ui.theme.viewmodel.DetailMhsViewModel
+import com.example.pertemuan10.ui.theme.viewmodel.DetailUiState
+import com.example.pertemuan10.ui.theme.viewmodel.PenyediaViewModel
+import com.example.pertemuan10.ui.theme.viewmodel.toMahasiswaEntity
 
 
 @Composable
@@ -45,7 +50,7 @@ fun DetailMhsView(
 ){
     Scaffold(
         topBar = {
-            TopAppBar(
+            CustomTopAppBar(
                 judul = "Detail Mahasiswa",
                 showBackButton = true,
                 onBack = onBack,

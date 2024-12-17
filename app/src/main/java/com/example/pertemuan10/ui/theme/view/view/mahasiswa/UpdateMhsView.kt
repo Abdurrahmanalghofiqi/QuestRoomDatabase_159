@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.room.util.TableInfo
+import com.example.pertemuan10.ui.theme.costumwidget.kt.CustomTopAppBar
+import com.example.pertemuan10.ui.theme.viewmodel.PenyediaViewModel
+import com.example.pertemuan10.ui.theme.viewmodel.UpdateMhsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -51,7 +54,7 @@ fun UpdateMhsView(
         modifier = modifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState)}, //Tempatklan Snackbar di scaffold
         topBar = {
-            TopAppBar(
+            CustomTopAppBar(
                 judul = "Edit Mahasiswa",
                 showBackButton = true,
                 onBack = onBack,

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -25,11 +26,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan10.ui.theme.costumwidget.kt.CustomTopAppBar
 import com.example.pertemuan10.ui.theme.navigation.Alamatnavigasi
 import com.example.pertemuan10.ui.theme.viewmodel.FormErrorState
 import com.example.pertemuan10.ui.theme.viewmodel.MahasiswaEvent
 import com.example.pertemuan10.ui.theme.viewmodel.MahasiswaViewModel
 import com.example.pertemuan10.ui.theme.viewmodel.MhsUIState
+import com.example.pertemuan10.ui.theme.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 object  DestinasiInsert : Alamatnavigasi {
@@ -43,7 +46,7 @@ fun InsertMhsView(
     modifier: Modifier = Modifier,
     viewModel: MahasiswaViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
-    val uiState = viewModel.uiStates
+    val uiState = viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
@@ -111,7 +114,7 @@ fun InsertBodyMhs(
             errorState = uiState.isEntryValid,
             modifier = Modifier.fillMaxWidth(),
         )
-        Button(
+        Button (
             onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
         ) {
