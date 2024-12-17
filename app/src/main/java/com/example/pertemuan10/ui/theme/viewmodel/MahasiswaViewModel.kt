@@ -49,6 +49,8 @@ class MahasiswaViewModel(private val repositortMhs: RepositoryMhs) : ViewModel()
             }
         }
     }
+
+
 }
 
 data class MhsUIState(
