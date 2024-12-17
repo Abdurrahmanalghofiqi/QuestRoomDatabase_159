@@ -1,5 +1,7 @@
 package com.example.pertemuan10.ui.theme.viewmodel
 
+import androidx.lifecycle.ViewModel
+import com.example.pertemuan10.repository.RepositoryMhs
 import com.exampleity.a0412202.entity.Mahasiswa
 
 class MahasiswaViewModel(private val repositortMhs: RepositoryMhs) : ViewModel() {
