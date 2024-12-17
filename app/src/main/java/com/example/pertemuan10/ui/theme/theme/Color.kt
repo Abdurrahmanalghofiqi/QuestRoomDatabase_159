@@ -1,4 +1,4 @@
-package com.example.pertemuan10.ui.theme
+package com.example.pertemuan10.ui.theme.theme
 
 import androidx.compose.ui.graphics.Color
 
