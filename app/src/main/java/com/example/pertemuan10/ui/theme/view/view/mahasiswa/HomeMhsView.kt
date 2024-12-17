@@ -29,7 +29,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pertemuan10.data.entity.Mahasiswa
-import com.example.pertemuan10.ui.theme.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 import java.lang.reflect.Modifier
 
