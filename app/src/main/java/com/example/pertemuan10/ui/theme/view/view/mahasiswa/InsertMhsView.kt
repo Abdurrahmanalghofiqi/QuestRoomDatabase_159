@@ -2,44 +2,90 @@ package com.example.pertemuan10.ui.theme.view.view.mahasiswa
 
 import androidx.compose.runtime.Composable
 
+object  DestinasiInsert : Alamatnavigasi{
+    override  val route: String = " insert_mhs"
+}
+
 @Composable
-fun FormMahasiswa(
-    mahasiswaEvent: MahasiswaEvent = MahasiswaEvent(),
-    OnValueChange: (MahasiswaEvent) -> Unit,
-    errorState: FormErrorState = FormErrorState(),
-    modifier: Modifier = Modifier
-){
-    val jenisKelamin = listOf("Laki-Laki", "Perempuan")
-    val kelas = listOf("A", "B", "C", "D", "E")
+fun InsertMhsView(
+    onBack: () -> Unit,
+    onNavigate : () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: MahasiswaViewModel = viewModel(factory = PenyediaViewModel.Factory)
+) {
+    val uiState = viewModel.uiState
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
-    column(
-        modifier = modifier.fillMaxWidth())
-    {
-        OutlinedTextField(
+    //Observasi perubahan snackbarmessage
+    LaunchedEffect(uiState.snackBarMessage) {
+        uiState.snackBarMessage?.let { message ->
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(message)
+                viewModel.resetSnackBarMessage()
+            }
+        }
+    }
+    Scaffold(
+        modifier = modifier,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp)
+
+        ) {
+            TopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Mahasiswa"
+
+            )
+
+            //isi Body
+            InsertBodyMhs(
+                uiState = uiState,
+                onValueChange = { updateEvent ->
+                    viewModel.updateState(updateEvent)
+                },
+                onClick = {
+                    coroutineScope.launch {
+                        viewModel.savedata() //Simpan data
+                    }
+                    onNavigate()
+                }
+            )
+        }
+    }
+
+}
+
+@Composable
+fun InsertBodyMhs(
+
+    modifier : Modifier = Modifier,
+    onValueChange: (MahasiswaEvent) -> Unit,
+    uiState: MhsUIState,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        FormMahasiswa(
+            mahasiswaEvent = uiState.mahasiswaEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
             modifier = Modifier.fillMaxWidth(),
-            value = mahasiswaEvent.nama,
-            onValueChange = {
-                onValueChange(mahasiswaEvent.copy(nama = it))
-            },
-            label = { Text(text: "Nama")},
-            isError = errorState.nama != null,
-            placeholder = { Text(text: "Masukkan Nama")},
         )
-
-        Text(
-            text = errorState.nama ?: "",
-            color = Color.Red
-        )
-        OutlinedTextField(
+        Button(
+            onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
-            value = mahasiswaEvent.nim, onValueChange = {
-                onValueChange(mahasiswaEvent.copy(nim = it))
-            },
-            label = { Text(text: "Masukkan NIM")},
-            keyboardOptions = keyboardOptions(keyboardType.Number)
-        )
-        Text(text = errorState.nim ?: "", Color.Red)
-
-        Spacer(modifier = Modifier.fillMaxWidth())
+        ) {
+            Text("Simpan")
+        }
     }
 }
